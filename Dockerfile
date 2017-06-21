@@ -15,6 +15,7 @@ RUN systemctl enable httpd
 RUN git clone -b master https://github.com/getgrav/grav.git /var/www/html
 RUN cd /var/www/html && bin/grav install
 RUN cd /var/www/html && bin/gpm selfupgrade
+RUN cd /var/www/html && bin/gpm install admin
 RUN cd /var/www/html && bin/gpm update
 RUN chown -R apache:apache /var/www/html
 
