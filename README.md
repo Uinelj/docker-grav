@@ -55,7 +55,7 @@ Access the webui at `http://<your-ip>`, for more information check out [GRAV](ht
 + CMS not usable behind reverse proxy.
 
 ## Changelog
-+ **28/06/2017:** The Blog Release
++ **29/06/2017:** The Blog Release
 	- added tag **blog** This is a skeleton of [Blog-Skeleton](http://demo.getgrav.org/blog-skeleton)
 + **28/06/2017:** The Even Smaller Release
 	- Now uses image from ej52/alpine-nginx-php
