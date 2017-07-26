@@ -3,16 +3,24 @@ FROM ej52/alpine-nginx-php
 MAINTAINER David Savell https://github.com/dsavell
 
 # Install Core Packages
-RUN apk add --no-cache git
-
-# Download GRAV
-WORKDIR /var/www/
-RUN rm -fR /var/www/*
-RUN wget https://github.com/getgrav/grav-skeleton-blog-site/releases/download/1.1.1/grav-skeleton-blog-site-v1.1.1.zip
-RUN unzip grav-skeleton-blog-site-v1.1.1.zip
-RUN cp -R /var/www/grav-skeleton-blog-site/* /var/www
-RUN rm -rf grav-skeleton-blog-site
-RUN rm -rf grav-skeleton-blog-site-v1.1.1.zip
+RUN apk add --no-cache --virtual=build-dependencies \
+	git \
+	curl && \
+# Download & extract "grav-skeleton-blog-site"
+	SKELETON_VERSION=$(curl -sX GET "https://api.github.com/repos/getgrav/grav-skeleton-blog-site/releases/latest" \
+	| awk '/tag_name/{print $4;exit}' FS='[""]') && \
+	curl -o \
+	/tmp/grav-skeleton-blog-site.zip -L \
+		"https://github.com/getgrav/grav-skeleton-blog-site/releases/download/${SKELETON_VERSION}/grav-skeleton-blog-site-v${SKELETON_VERSION}.zip" && \
+	unzip \
+		/tmp/grav-skeleton-blog-site.zip && \
+	cp -R \
+		/tmp/grav-skeleton-blog-site/* /var/www && \
+# Clean
+	apk del --purge \
+		build-dependencies && \
+	rm -rf \ 
+		/tmp/*
 
 # Install GRAV
 WORKDIR /var/www/
