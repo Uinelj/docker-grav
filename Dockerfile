@@ -2,17 +2,20 @@ FROM ej52/alpine-nginx-php
 
 MAINTAINER David Savell https://github.com/dsavell
 
+# API Latest Version
+ARG SKELETON_VERSION=$(curl -sX GET "https://api.github.com/repos/getgrav/grav-skeleton-blog-site/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]')
+
 # Install Core Packages
-RUN apk add --no-cache git
+RUN apk add --no-cache git curl
 
 # Download GRAV
 WORKDIR /var/www/
 RUN rm -fR /var/www/*
-RUN wget https://github.com/getgrav/grav-skeleton-blog-site/releases/download/1.1.1/grav-skeleton-blog-site-v1.1.1.zip
-RUN unzip grav-skeleton-blog-site-v1.1.1.zip
+RUN wget https://github.com/getgrav/grav-skeleton-blog-site/releases/download/${SKELETON_VERSION}/grav-skeleton-blog-site-v${SKELETON_VERSION}.zip
+RUN unzip grav-skeleton-blog-site-v${SKELETON_VERSION}.zip
 RUN cp -R /var/www/grav-skeleton-blog-site/* /var/www
 RUN rm -rf grav-skeleton-blog-site
-RUN rm -rf grav-skeleton-blog-site-v1.1.1.zip
+RUN rm -rf grav-skeleton-blog-site-v${SKELETON_VERSION}.zip
 
 # Install GRAV
 WORKDIR /var/www/
