@@ -59,8 +59,6 @@ Access the webui at `http://<your-ip>`, for more information check out [GRAV](ht
 + CMS not usable behind reverse proxy.
 
 ## Changelog
-+ **26/07/2017:** The Automated Release
-	- Updated tag **blog** Now uses githubs API to grab [Blog-Skeleton](http://demo.getgrav.org/blog-skeleton) latest version.
 + **29/06/2017:** The Blog Release
 	- added tag **blog** This is a skeleton of [Blog-Skeleton](http://demo.getgrav.org/blog-skeleton)
 + **28/06/2017:** The Even Smaller Release
