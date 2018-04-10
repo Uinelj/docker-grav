@@ -34,5 +34,8 @@ RUN \
 	&& rm -rf grav-skeleton-blog-site.zip \
 	&& apk del --purge build-dependencies
 
+# Volume
+VOLUME /var/www
+
 # Exposed Ports
 EXPOSE 80
