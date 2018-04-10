@@ -29,5 +29,8 @@ RUN \
 RUN \
 	apk del --purge build-dependencies
 
+# Volume
+VOLUME /var/www
+
 # Exposed Ports
 EXPOSE 80
